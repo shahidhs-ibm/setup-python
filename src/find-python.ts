@@ -90,6 +90,8 @@ export async function useCpythonVersion(
 
   if (!installDir) {
     const osInfo = await getOSInfo();
+    core.info(`SHS: In find-python.ts file. Arch found is ${architecture}`);
+    console.log("=== SHS: In find-python.ts file. Arch found is " + architecture + "=====");
     throw new Error(
       [
         `The version '${version}' with architecture '${architecture}' was not found for ${
