@@ -90368,6 +90368,8 @@ function useCpythonVersion(version, architecture, updateEnvironment, checkLatest
         }
         if (!installDir) {
             const osInfo = yield (0, utils_1.getOSInfo)();
+	    core.info(`SHS: In dist_setup_index.js file. Arch found is ${architecture}`);
+	    console.log("=== SHS: In dist_setup_index.js file. Arch found is " + architecture + "=====");
             throw new Error([
                 `The version '${version}' with architecture '${architecture}' was not found for ${osInfo
                     ? `${osInfo.osName} ${osInfo.osVersion}`
