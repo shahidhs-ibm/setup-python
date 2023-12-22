@@ -90822,6 +90822,8 @@ function useCpythonVersion(version, architecture, updateEnvironment, checkLatest
         }
         if (!installDir) {
             const osInfo = yield (0, utils_1.getOSInfo)();
+            core.info(`SHS: In find-python.ts file. Arch found is ${architecture}`);
+            console.log("=== SHS: In find-python.ts file. Arch found is " + architecture + "=====");
             throw new Error([
                 `The version '${version}' with architecture '${architecture}' was not found for ${osInfo
                     ? `${osInfo.osName} ${osInfo.osVersion}`
@@ -91583,6 +91585,16 @@ function run() {
             if (versions.length) {
                 let pythonVersion = '';
                 const arch = core.getInput('architecture') || os.arch();
+                core.info(`SHS: In setup-python.ts file. Arch found is ${arch}`);
+                console.log("=== SHS: In setup-python.ts file. Arch found is " + arch + "=====");
+                switch (os.endianness()) {
+                    case 'LE':
+                        console.log("SHS: CPU is little endian format");
+                        break;
+                    case 'BE':
+                        console.log("SHS: CPU is big endian format");
+                        break;
+                }
                 const updateEnvironment = core.getBooleanInput('update-environment');
                 core.startGroup('Installed versions');
                 for (const version of versions) {
