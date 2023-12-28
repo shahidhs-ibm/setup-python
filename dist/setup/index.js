@@ -90824,12 +90824,18 @@ function useCpythonVersion(version, architecture, updateEnvironment, checkLatest
             const osInfo = yield (0, utils_1.getOSInfo)();
             core.info(`SHS: In find-python.ts file. Arch found is ${architecture}`);
             console.log("=== SHS: In find-python.ts file. Arch found is " + architecture + "=====");
-            throw new Error([
-                `The version '${version}' with architecture '${architecture}' was not found for ${osInfo
-                    ? `${osInfo.osName} ${osInfo.osVersion}`
-                    : 'this operating system'}.`,
-                `The list of all available versions can be found here: ${installer.MANIFEST_URL}`
-            ].join(os.EOL));
+            let ppcArch = "ppc64";
+            if (ppcArch === architecture) {
+                console.log("=== SHS: In find-python.ts file. Arch matched with PPC64, skipping the error..." + "=====");
+            }
+            else {
+                throw new Error([
+                    `The version '${version}' with architecture '${architecture}' was not found for ${osInfo
+                        ? `${osInfo.osName} ${osInfo.osVersion}`
+                        : 'this operating system'}.`,
+                    `The list of all available versions can be found here: ${installer.MANIFEST_URL}`
+                ].join(os.EOL));
+            }
         }
         const _binDir = binDir(installDir);
         const binaryExtension = utils_1.IS_WINDOWS ? '.exe' : '';

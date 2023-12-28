@@ -92,6 +92,10 @@ export async function useCpythonVersion(
     const osInfo = await getOSInfo();
     core.info(`SHS: In find-python.ts file. Arch found is ${architecture}`);
     console.log("=== SHS: In find-python.ts file. Arch found is " + architecture + "=====");
+    let ppcArch: string = "ppc64";
+    if (ppcArch === architecture) {
+      console.log("=== SHS: In find-python.ts file. Arch matched with PPC64, skipping the error..." + "=====");
+    } else {
     throw new Error(
       [
         `The version '${version}' with architecture '${architecture}' was not found for ${
@@ -102,6 +106,7 @@ export async function useCpythonVersion(
         `The list of all available versions can be found here: ${installer.MANIFEST_URL}`
       ].join(os.EOL)
     );
+    }
   }
 
   const _binDir = binDir(installDir);
